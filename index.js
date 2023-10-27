@@ -1,36 +1,56 @@
-// let item = document.getElementById("ind");
-// console.log(item);
-// let newitem=document.createElement("li");
-// newitem.textContent="four"
-// item.appendChild(newitem);
-
-//html => creates a Dom  => render/paint the page 
-// const countElement=document.getElementById("count");
-// function setCountfun(){
-//     let count=Number(countElement.textContent);
-//     count=count+1;
-//     countElement.textContent=count;
-// }
-//imperative programming 
-//we are setting value incrementing step by step 
-const countApp={
-    getCount:()=>{
-        const element=document.getElementById("count");
-        return Number(element.textContent); 
+let markup = {
+  type: "article",
+  children: [
+    {
+      type: "h2",
+      children: [
+        {
+          type: "text",
+          value: "Counter",
+        },
+      ],
     },
-    setCount:(val)=>{
-        const countElement=document.getElementById("count");
-        countElement.textContent=val;
+    {
+      type: "h3",
+      children: [
+        {
+          type: "text",
+          value: "Counter2",
+        },
+      ],
+    },
+    {
+      type: "h1",
+      children: [
+        {
+          type: "text",
+          value: "Counter",
+        },
+      ],
+    },
+    {
+      type: "h3",
+      children: [
+        {
+          type: "text",
+          value: "Counter2",
+        },
+      ],
+    },
+  ],
+};
+//fake dom haha
+console.log(markup);
+const main=document.getElementById("app");
+console.log(main);
+
+function addElements(pojoElement,parentDOMNode){
+    let DOMNode=pojoElement.type==="text"?document.createTextNode(pojoElement.value):document.createElement(pojoElement.type);
+    if(pojoElement.children){
+        pojoElement.children.forEach((child)=>{
+            addElements(child,DOMNode);
+        })
     }
+    parentDOMNode.appendChild(DOMNode);
 }
-function setCount(){
-    let count=countApp.getCount();
-    if(count>=5){
-        countApp.setCount(0)
-    }
-    else{
-        countApp.setCount(count+1);
-    }
-}
-//declarative piece of code;
-//react is fb devs imperative code which makes our life easier
+addElements(markup,main);
