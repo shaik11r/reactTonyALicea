@@ -11063,9 +11063,11 @@
     setTextContent(domElement, '');
   }
   function commitTextUpdate(textInstance, oldText, newText) {
+    console.log(`updating text${newText}`);
     textInstance.nodeValue = newText;
   }
   function appendChild(parentInstance, child) {
+    console.log(`AppendingChild....`)
     parentInstance.appendChild(child);
   }
   function appendChildToContainer(container, child) {
@@ -11073,9 +11075,17 @@
 
     if (container.nodeType === COMMENT_NODE) {
       parentNode = container.parentNode;
+      console.log(`inserting child in container...`);
+      console.log(child)
+
       parentNode.insertBefore(child, container);
     } else {
+
       parentNode = container;
+      console.log(`inserting child in container...`);
+      console.log(child)
+      console.log("container is ....")
+      console.log(parentNode);
       parentNode.appendChild(child);
     } // This container might be used for a portal.
     // If something inside a portal is clicked, that click should bubble

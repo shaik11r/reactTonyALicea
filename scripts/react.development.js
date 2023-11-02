@@ -758,6 +758,7 @@
       });
 
       if (Object.freeze) {
+        // console.log('we react are freezing your props')
         Object.freeze(element.props);
         Object.freeze(element);
       }
